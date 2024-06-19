@@ -29,7 +29,7 @@
 .square:nth-child(16n - 4) button,
 .square:nth-child(16n - 2) button,
 .square:nth-child(16n) button{
-    background-color: #b58863; /* Couleur foncée */
+    background-color: #b58863;
 }
 
 .square:nth-child(16n - 14) button,
@@ -40,5 +40,13 @@
 .square:nth-child(16n - 5) button,
 .square:nth-child(16n - 3) button,
 .square:nth-child(16n - 1) button{
-    background-color: #f0d9b5; /* Couleur claire */
+    background-color: #f0d9b5; 
+}
+
+.null-piece {
+    background-color: green; /* Fond vert pour les pièces nulles */
+}
+
+.non-null-piece {
+    background-color: white; /* Fond blanc pour les pièces non-nulles */
 }

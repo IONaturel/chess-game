@@ -1,22 +1,20 @@
 import React from 'react';
 import '../styles/Square.css';
 
-const Square = ({ index }) => {
-    const pieces = [
-        '♜', '♞', '♝', '♛', '♚', '♝', '♞', '♜',
-        '♟︎', '♟︎', '♟︎', '♟︎', '♟︎', '♟︎', '♟︎', '♟︎',
-        '', '', '', '', '', '', '', '',
-        '', '', '', '', '', '', '', '',
-        '', '', '', '', '', '', '', '',
-        '', '', '', '', '', '', '', '',
-        '♙', '♙', '♙', '♙', '♙', '♙', '♙', '♙',
-        '♖', '♘', '♗', '♕', '♔', '♗', '♘', '♖',
-    ];
-    const piece = pieces[index];
+const Square = ({ index, piece, onClick }) => {
+
+    // Gestionnaire de clic sur la case
+    const handleClick = () => {
+        onClick(index);
+    };
+
+    
+
+
 
     return (
-        <div className="square">
-            <button>{piece}</button>
+        <div className={"square" }>
+            <button onClick={handleClick}>{piece}</button>
         </div>
     );
 };
