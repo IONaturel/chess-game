@@ -27,43 +27,78 @@ const Board = () => {
 
     const [valeur, setValeur] = useState();
 
+    const findNextMovesPositions = (pieces) => {
+        const positions = [];
+        for (let i = 0; i < pieces.length; i++) {
+            if (pieces[i] === "\u25CB") {
+                positions.push(i);
+            }
+        }
+        if (positions.length !== 0) {
+            return positions;
+        }
+        else {
+            return null;
+        }
+    };
+
+    const emptyNextMoves = (positions) => {
+        const newPieces = [...pieces];
+        for (let cpt = 0; cpt < positions.length; cpt++) {
+            const index = positions[cpt];
+            //console.log("positions[cpt] : " + index);
+            newPieces[index] = ""; 
+        }
+        setPieces(newPieces);
+    };
+
 
     // Gestionnaire de clic sur une case
     const handleSquareClick = (index) => {
-        console.log('Case cliquée :', index);
-        console.log("valeur : " + valeur)
-        let cpt = 0;
+        // console.log('Case cliquée :', index);
+        // console.log("valeur : " + valeur)
 
-        for (let i = 0; i < pieces.length; i++) {
-            if (pieces[i] === "\u25CB") {
-                cpt++;
-            }
-        }
+        let nextMovesPositions = findNextMovesPositions(pieces);
 
-        if (cpt > 0) {
-            if (pieces[index] !== "\u25CB" || pieces[index] === "") {
-                return;
-            }
+        if (nextMovesPositions !== null) {
+            emptyNextMoves(nextMovesPositions);
         }
 
         if (pieces[index] !== '') {
             if (pieces[index] === '♟︎') {
-                const movePossible = index + 8;
-                console.log("La case ou le pion peut se déplacer: " + valeur);
+                let nextMovesPositions = findNextMovesPositions(pieces);
                 const newPieces = [...pieces];
+
+                if (nextMovesPositions !== null) {
+                    for (let cpt = 0; cpt < nextMovesPositions.length; cpt++) {
+                        const pos = nextMovesPositions[cpt];
+                        newPieces[pos] = ""; // Empty the position
+                    }
+                }
+
+                const movePossible = index + 8;
                 newPieces[movePossible] = '\u25CB';
                 setPieces(newPieces);
                 setValeur(index);
             }
             else if (pieces[index] === '♙') {
-                const movePossible = index - 8;
-                console.log("La case ou le pion peut se déplacer: " + valeur);
+                let nextMovesPositions = findNextMovesPositions(pieces);
                 const newPieces = [...pieces];
+
+                if (nextMovesPositions !== null) {
+                    for (let cpt = 0; cpt < nextMovesPositions.length; cpt++) {
+                        const pos = nextMovesPositions[cpt];
+                        newPieces[pos] = ""; // Empty the position
+                    }
+                }
+
+                const movePossible = index - 8;
                 newPieces[movePossible] = '\u25CB';
                 setPieces(newPieces);
                 setValeur(index);
             }
-            if(pieces[index] === "\u25CB"){
+            if (pieces[index] === "\u25CB"){
+                emptyNextMoves(nextMovesPositions);
                 const newPieces = [...pieces];
                 newPieces[index] = newPieces[valeur];
                 newPieces[valeur] = '';
@@ -75,9 +110,7 @@ const Board = () => {
 
 
 
-        // const newPieces = [...pieces];
-        // newPieces[index] = '♞';
-        // setPieces(newPieces);
+    
     };
 
     // Générer les cases de l'échiquier
