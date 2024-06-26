@@ -29,7 +29,11 @@ const Board = () => {
         }
         else{
             const nextMovesPositions = findNextMovesPositions(pieces);
-            emptyNextMoves(pieces, nextMovesPositions, setPieces);
+            if(nextMovesPositions === null){
+                return;
+            }
+            const getNewPieces = emptyNextMoves(pieces, nextMovesPositions);
+            setPieces(getNewPieces);
         }
     };
 

@@ -13,13 +13,16 @@ export const findNextMovesPositions = (pieces) => {
     }
 };
 
-export const emptyNextMoves = (pieces, positions, setPieces) => {
+export const emptyNextMoves = (pieces, positions) => {
+    if(positions === null){
+        return;
+    }
     const newPieces = [...pieces];
     for (let cpt = 0; cpt < positions.length; cpt++) {
         const index = positions[cpt];
         newPieces[index] = "";
     }
-    setPieces(newPieces);
+    return newPieces;
 };
 
 export const movePawn = (pieces, index, setPieces, setValeur) => {
