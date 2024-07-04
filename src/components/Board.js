@@ -3,7 +3,7 @@ import Square from './Square';
 import '../styles/Board.css';
 import { movePawn, movePawnBack } from './Pawn';
 import { moveToEmptySquare, findNextMovesPositions, emptyNextMoves,} from '../utilities/Utilities';
-//import { moveTower } from './Tower'
+import { moveTower } from './Tower'
 
 const Board = () => {
     const initialBoard = [
@@ -27,7 +27,7 @@ const Board = () => {
                 movePawnBack(pieces, index, setPieces, setValeur);
             } 
             else if(pieces[index] === '♖'){
-                //moveTower(pieces, index, setPieces, setValeur);
+                moveTower(pieces, index, setPieces, setValeur);
             }
             else if (pieces[index] === "\u25CB") {
                 moveToEmptySquare(pieces, index, valeur, setPieces);
