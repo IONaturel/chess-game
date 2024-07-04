@@ -5,6 +5,7 @@ const Square = ({ index, piece, onClick }) => {
 
     // Gestionnaire de clic sur la case
     const handleClick = () => {
+        console.log("Case clicked : " + index);
         onClick(index);
     };
 
