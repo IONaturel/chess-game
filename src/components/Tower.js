@@ -13,6 +13,10 @@ export const moveTower = (pieces, index, setPieces, setValeur) => {
     let nextMoveUp = index - 8;
     let nextMoveDown = index + 8;
 
+    let nextMoveRight = index + 1;
+    let nextMoveLeft = index - 1;
+
+
     for(let i=0; i<pieces.length; i++){
         if(pieces[nextMoveUp] === ''){
             movesPossible.push(nextMoveUp);
@@ -22,13 +26,18 @@ export const moveTower = (pieces, index, setPieces, setValeur) => {
             movesPossible.push(nextMoveDown);
             nextMoveDown += 8; 
         }
+        if(pieces[nextMoveRight] === '' && getFractionalPart(nextMoveRight, 8) !== "0"){
+            movesPossible.push(nextMoveRight);
+            nextMoveRight += 1; 
+        }
+        if(pieces[nextMoveLeft] === '' && getFractionalPart(nextMoveLeft, 8) !== "875"){
+            console.log("nextMoveLeft : " + nextMoveLeft);
+            movesPossible.push(nextMoveLeft);
+            nextMoveLeft -= 1; 
+        }
         
     }
 
-    
-
-
-    
     const newPieces = [...pieces];
 
     for(let i = 0; i<movesPossible.length ; i++){
