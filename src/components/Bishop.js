@@ -1,4 +1,4 @@
-// Tower.js
+// Bishop.js
 import {emptyNextMoves, findNextMovesPositions, getFractionalPart} from '../utilities/Utilities';
 
 export const moveBishop = (pieces, index, setPieces, setValeur) => {
@@ -15,7 +15,7 @@ export const moveBishop = (pieces, index, setPieces, setValeur) => {
     let nextMoveDownRight = index + 9;
     let nextMoveDownLeft = index + 7;
 
-    for(let i=0; i<pieces.length; i++){
+    for(let i=0; i<8; i++){
         if(pieces[nextMoveUpLeft] === '' && getFractionalPart(nextMoveUpLeft, 8) !== '875'){
             movesPossible.push(nextMoveUpLeft);
             nextMoveUpLeft -= 9; 

@@ -1,4 +1,4 @@
-// Tower.js
+// Horse.js
 import {emptyNextMoves, findNextMovesPositions, findColumnOfPiece} from '../utilities/Utilities';
 
 export const moveHorse = (pieces, index, setPieces, setValeur) => {

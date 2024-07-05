@@ -1,8 +1,7 @@
-// Tower.js
+// Queen.js
 import {getFractionalPart, emptyNextMoves, findNextMovesPositions} from '../utilities/Utilities';
 
-
-export const moveTower = (pieces, index, setPieces, setValeur) => {
+export const moveQueen = (pieces, index, setPieces, setValeur) => {
     let nextMovesPositions = findNextMovesPositions(pieces);
 
     if (nextMovesPositions !== null) {
@@ -12,12 +11,16 @@ export const moveTower = (pieces, index, setPieces, setValeur) => {
     const movesPossible = [];
     let nextMoveUp = index - 8;
     let nextMoveDown = index + 8;
-
     let nextMoveRight = index + 1;
     let nextMoveLeft = index - 1;
 
+    let nextMoveUpLeft = index - 9;
+    let nextMoveUpRight = index - 7;
+    let nextMoveDownRight = index + 9;
+    let nextMoveDownLeft = index + 7;
 
     for(let i=0; i<8; i++){
+        // Tower movement
         if(pieces[nextMoveUp] === ''){
             movesPossible.push(nextMoveUp);
             nextMoveUp -= 8; 
@@ -34,6 +37,24 @@ export const moveTower = (pieces, index, setPieces, setValeur) => {
             console.log("nextMoveLeft : " + nextMoveLeft);
             movesPossible.push(nextMoveLeft);
             nextMoveLeft -= 1; 
+        }
+
+        // Bishop movement
+        if(pieces[nextMoveUpLeft] === '' && getFractionalPart(nextMoveUpLeft, 8) !== '875'){
+            movesPossible.push(nextMoveUpLeft);
+            nextMoveUpLeft -= 9; 
+        }
+        if(pieces[nextMoveUpRight] === '' && getFractionalPart(nextMoveUpRight, 8) !== '0'){
+            movesPossible.push(nextMoveUpRight);
+            nextMoveUpRight -= 7; 
+        }
+        if(pieces[nextMoveDownRight] === '' && getFractionalPart(nextMoveDownRight, 8) !== '0'){
+            movesPossible.push(nextMoveDownRight);
+            nextMoveDownRight += 9; 
+        }
+        if(pieces[nextMoveDownLeft] === '' && getFractionalPart(nextMoveDownLeft, 8) !== '875'){
+            movesPossible.push(nextMoveDownLeft);
+            nextMoveDownLeft += 7; 
         }
     }
 

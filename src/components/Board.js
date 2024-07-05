@@ -6,6 +6,8 @@ import { moveToEmptySquare, findNextMovesPositions, emptyNextMoves,} from '../ut
 import { moveTower } from './Tower'
 import { moveHorse } from './Horse'
 import { moveBishop } from './Bishop'
+import { moveQueen } from './Queen'
+
 
 
 
@@ -14,7 +16,7 @@ const Board = () => {
         '', '', '', '', '', '', '', '',
         '', '', '', '', '', '', '', '',
         '', '', '', '', '', '', '', '',
-        '', '', '', '♖', '', '', '', '',
+        '', '', '', '♕', '', '', '', '',
         '', '', '', '', '', '', '', '',
         '', '', '', '', '', '', '', '',
         '', '', '', '', '', '', '', '',
@@ -38,6 +40,9 @@ const Board = () => {
             }
             else if(pieces[index] === '♗'){
                 moveBishop(pieces, index, setPieces, setValeur);
+            }
+            else if(pieces[index] === '♕'){
+                moveQueen(pieces, index, setPieces, setValeur);
             }
             else if (pieces[index] === "\u25CB") {
                 moveToEmptySquare(pieces, index, valeur, setPieces);
