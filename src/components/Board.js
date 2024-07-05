@@ -4,17 +4,19 @@ import '../styles/Board.css';
 import { movePawn, movePawnBack } from './Pawn';
 import { moveToEmptySquare, findNextMovesPositions, emptyNextMoves,} from '../utilities/Utilities';
 import { moveTower } from './Tower'
+import { moveHorse } from './Horse'
+
 
 const Board = () => {
     const initialBoard = [
-        '♜', '♞', '♝', '♛', '♚', '♝', '♞', '♜',
-        '♟︎', '♟︎', '♟︎', '♟︎', '♟︎', '♟︎', '♟︎', '♟︎',
-        '', '', '', '', '', '', '', '',
-        '', '', '', '♖', '', '♟︎', '', '',
         '', '', '', '', '', '', '', '',
         '', '', '', '', '', '', '', '',
-        '♙', '♙', '♙', '♙', '♙', '♙', '♙', '♙',
-        '♖', '♘', '♗', '♕', '♔', '♗', '♘', '♖',
+        '', '', '', '', '', '', '', '',
+        '', '', '', '♘', '', '', '', '',
+        '', '', '', '', '', '', '', '',
+        '', '', '', '', '', '', '', '',
+        '', '', '', '', '', '', '', '',
+        '', '', '', '', '', '', '', '',
     ];
     const [pieces, setPieces] = useState(initialBoard);
     const [valeur, setValeur] = useState();
@@ -28,6 +30,9 @@ const Board = () => {
             } 
             else if(pieces[index] === '♖'){
                 moveTower(pieces, index, setPieces, setValeur);
+            }
+            else if(pieces[index] === '♘'){
+                moveHorse(pieces, index, setPieces, setValeur);
             }
             else if (pieces[index] === "\u25CB") {
                 moveToEmptySquare(pieces, index, valeur, setPieces);

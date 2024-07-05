@@ -45,3 +45,29 @@ export const findNextMovesPositions = (pieces) => {
       return null;
   }
 };
+
+export const findColumnOfPiece = (index) => {
+  let col = 0;
+  if(getFractionalPart(index, 8) === "125"){
+    col = 1;
+  }
+  else if(getFractionalPart(index, 8) === "25"){
+    col = 2;
+  }
+  else if(getFractionalPart(index, 8) === "375"){
+    col = 3;
+  }
+  else if(getFractionalPart(index, 8) === "5"){
+    col = 4;
+  }
+  else if(getFractionalPart(index, 8) === "625"){
+    col = 5;
+  }
+  else if(getFractionalPart(index, 8) === "75"){
+    col = 6;
+  }
+  else if(getFractionalPart(index, 8) === "875"){
+    col = 7;
+  }
+  return col;
+}
