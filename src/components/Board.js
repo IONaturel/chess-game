@@ -7,16 +7,14 @@ import { moveTower } from './Tower'
 import { moveHorse } from './Horse'
 import { moveBishop } from './Bishop'
 import { moveQueen } from './Queen'
-
-
-
+import { moveKing } from './King'
 
 const Board = () => {
     const initialBoard = [
         '', '', '', '', '', '', '', '',
         '', '', '', '', '', '', '', '',
         '', '', '', '', '', '', '', '',
-        '', '', '', '♕', '', '', '', '',
+        '', '', '', '♔', '', '', '', '',
         '', '', '', '', '', '', '', '',
         '', '', '', '', '', '', '', '',
         '', '', '', '', '', '', '', '',
@@ -43,6 +41,9 @@ const Board = () => {
             }
             else if(pieces[index] === '♕'){
                 moveQueen(pieces, index, setPieces, setValeur);
+            }
+            else if(pieces[index] === '♔'){
+                moveKing(pieces, index, setPieces, setValeur);
             }
             else if (pieces[index] === "\u25CB") {
                 moveToEmptySquare(pieces, index, valeur, setPieces);

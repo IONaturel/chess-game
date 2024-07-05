@@ -35,7 +35,6 @@ export const moveBishop = (pieces, index, setPieces, setValeur) => {
         
     }
 
-
     const newPieces = [...pieces];
 
     for(let i = 0; i<movesPossible.length ; i++){
