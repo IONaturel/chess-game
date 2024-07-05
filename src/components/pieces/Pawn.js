@@ -1,33 +1,66 @@
-// Pawn.js
-import {emptyNextMoves, findNextMovesPositions} from '../../utilities/Utilities';
+import { emptyNextMoves, findNextMovesPositions, findColumnOfPiece, isWhitePiece } from '../../utilities/Utilities';
 
-export const movePawn = (pieces, index, setPieces, setValeur) => {
+export const movePawn = (pieces, index, setPieces, setValeur, setGreenSquares) => {
     let nextMovesPositions = findNextMovesPositions(pieces);
 
     if (nextMovesPositions !== null) {
-        pieces = emptyNextMoves(pieces, nextMovesPositions);
+        pieces = emptyNextMoves(pieces, nextMovesPositions, setGreenSquares);
     }
 
     const newPieces = [...pieces];
     const movePossible = index + 8;
-    newPieces[movePossible] = '\u25CB';
+    const attackMove = index + 7;
+    const attackMove2 = index + 9;
+    const newGreenSquares = [];
+
+    const columnPiece = findColumnOfPiece(index);
+    const isWhite = isWhitePiece(pieces, index);
+
+    if (pieces[movePossible] === '') {
+        newPieces[movePossible] = '\u25CB';
+    }
+    if (pieces[attackMove] !== '' && columnPiece !== 0) {
+        newGreenSquares.push(attackMove);
+    }
+    if (pieces[attackMove2] !== '' && columnPiece !== 7) {
+        newGreenSquares.push(attackMove2);
+    }
+
     setPieces(newPieces);
     setValeur(index);
-    
+    setGreenSquares(newGreenSquares);
 };
 
-export const movePawnBack = (pieces, index, setPieces, setValeur) => {
+
+export const movePawnBack = (pieces, index, setPieces, setValeur, setGreenSquares) => {
     let nextMovesPositions = findNextMovesPositions(pieces);
 
     if (nextMovesPositions !== null) {
-        pieces = emptyNextMoves(pieces, nextMovesPositions);
+        pieces = emptyNextMoves(pieces, nextMovesPositions, setGreenSquares);
     }
-
+    
     const newPieces = [...pieces];
     const movePossible = index - 8;
-    newPieces[movePossible] = '\u25CB';
+    const attackMove = index - 7;
+    const attackMove2 = index - 9;
+    const newGreenSquares = [];
+
+    const columnPiece = findColumnOfPiece(index);
+
+    if(pieces[movePossible] === ''){
+        newPieces[movePossible] = '\u25CB';
+    }
+
+    if (pieces[attackMove] !== '' && columnPiece !== 7) {
+        newGreenSquares.push(attackMove);
+    }
+    if (pieces[attackMove2] !== '' && columnPiece !== 0) {
+        newGreenSquares.push(attackMove2);
+    }
+
     setPieces(newPieces);
     setValeur(index);
+    setGreenSquares(newGreenSquares);
 };
 
 

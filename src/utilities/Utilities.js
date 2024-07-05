@@ -11,7 +11,10 @@ export const getFractionalPart = (numerator, denominator) => {
     return decimalString.substring(decimalIndex + 1);
   }
 
-  export const emptyNextMoves = (pieces, positions) => {
+  export const emptyNextMoves = (pieces, positions, setGreenSquares) => {
+    const newGreenSquares = [];
+    setGreenSquares(newGreenSquares);
+
     if(positions === null){
         return;
     }
@@ -23,13 +26,16 @@ export const getFractionalPart = (numerator, denominator) => {
     return newPieces;
 };
 
-export const moveToEmptySquare = (pieces, index, valeur, setPieces) => {
+export const moveToEmptySquare = (pieces, index, valeur, setPieces, setGreenSquares) => {
   let nextMovesPositions = findNextMovesPositions(pieces);
-  pieces = emptyNextMoves(pieces, nextMovesPositions);
+  pieces = emptyNextMoves(pieces, nextMovesPositions, setGreenSquares);
   const newPieces = [...pieces];
   newPieces[index] = newPieces[valeur];
   newPieces[valeur] = '';
   setPieces(newPieces);
+
+  const newGreenSquares = [];
+  setGreenSquares(newGreenSquares);
 };
 
 export const findNextMovesPositions = (pieces) => {
@@ -70,4 +76,13 @@ export const findColumnOfPiece = (index) => {
     col = 7;
   }
   return col;
+}
+
+export const isWhitePiece = (pieces, index) => {
+  if(pieces[index] === "♜" || pieces[index] === "♞" || pieces[index] === "♝" || pieces[index] === "♛" || pieces[index] === "♚" || pieces[index] === "♟︎"){
+    return false;
+  }
+  else{
+    return true;
+  }
 }

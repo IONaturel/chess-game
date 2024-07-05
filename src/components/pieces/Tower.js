@@ -1,11 +1,11 @@
 // Tower.js
 import {getFractionalPart, emptyNextMoves, findNextMovesPositions} from '../../utilities/Utilities';
 
-export const moveTower = (pieces, index, setPieces, setValeur) => {
+export const moveTower = (pieces, index, setPieces, setValeur, setGreenSquares) => {
     let nextMovesPositions = findNextMovesPositions(pieces);
 
     if (nextMovesPositions !== null) {
-        pieces = emptyNextMoves(pieces, nextMovesPositions);
+        pieces = emptyNextMoves(pieces, nextMovesPositions, setGreenSquares);
     }
 
     const movesPossible = [];
