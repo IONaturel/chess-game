@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
 import Square from './Square';
 import '../styles/Board.css';
-import { movePawn, movePawnBack } from './Pawn';
+import { movePawn, movePawnBack } from './pieces/Pawn';
 import { moveToEmptySquare, findNextMovesPositions, emptyNextMoves,} from '../utilities/Utilities';
-import { moveTower } from './Tower'
-import { moveHorse } from './Horse'
-import { moveBishop } from './Bishop'
-import { moveQueen } from './Queen'
-import { moveKing } from './King'
+import { moveTower } from './pieces/Tower'
+import { moveHorse } from './pieces/Horse'
+import { moveBishop } from './pieces/Bishop'
+import { moveQueen } from './pieces/Queen'
+import { moveKing } from './pieces/King'
 
 const Board = () => {
     const initialBoard = [
         '', '', '', '', '', '', '', '',
         '', '', '', '', '', '', '', '',
         '', '', '', '', '', '', '', '',
-        '', '', '', '♔', '', '', '', '',
+        '', '♙', '♘', '♗', '♖', '♕', '♔', '',
         '', '', '', '', '', '', '', '',
         '', '', '', '', '', '', '', '',
         '', '', '', '', '', '', '', '',

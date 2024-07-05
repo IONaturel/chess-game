@@ -1,5 +1,5 @@
 // Tower.js
-import {getFractionalPart, emptyNextMoves, findNextMovesPositions} from '../utilities/Utilities';
+import {getFractionalPart, emptyNextMoves, findNextMovesPositions} from '../../utilities/Utilities';
 
 export const moveTower = (pieces, index, setPieces, setValeur) => {
     let nextMovesPositions = findNextMovesPositions(pieces);

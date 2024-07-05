@@ -1,5 +1,5 @@
 // Pawn.js
-import {emptyNextMoves, findNextMovesPositions} from '../utilities/Utilities';
+import {emptyNextMoves, findNextMovesPositions} from '../../utilities/Utilities';
 
 export const movePawn = (pieces, index, setPieces, setValeur) => {
     let nextMovesPositions = findNextMovesPositions(pieces);
