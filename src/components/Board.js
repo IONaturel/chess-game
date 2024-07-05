@@ -5,6 +5,8 @@ import { movePawn, movePawnBack } from './Pawn';
 import { moveToEmptySquare, findNextMovesPositions, emptyNextMoves,} from '../utilities/Utilities';
 import { moveTower } from './Tower'
 import { moveHorse } from './Horse'
+import { moveBishop } from './Bishop'
+
 
 
 const Board = () => {
@@ -12,7 +14,7 @@ const Board = () => {
         '', '', '', '', '', '', '', '',
         '', '', '', '', '', '', '', '',
         '', '', '', '', '', '', '', '',
-        '', '', '', '♘', '', '', '', '',
+        '', '', '', '♖', '', '', '', '',
         '', '', '', '', '', '', '', '',
         '', '', '', '', '', '', '', '',
         '', '', '', '', '', '', '', '',
@@ -33,6 +35,9 @@ const Board = () => {
             }
             else if(pieces[index] === '♘'){
                 moveHorse(pieces, index, setPieces, setValeur);
+            }
+            else if(pieces[index] === '♗'){
+                moveBishop(pieces, index, setPieces, setValeur);
             }
             else if (pieces[index] === "\u25CB") {
                 moveToEmptySquare(pieces, index, valeur, setPieces);
