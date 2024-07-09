@@ -14,15 +14,16 @@ export const movePawn = (pieces, index, setPieces, setValeur, setGreenSquares) =
     const newGreenSquares = [];
 
     const columnPiece = findColumnOfPiece(index);
-    const isWhite = isWhitePiece(pieces, index);
 
     if (pieces[movePossible] === '') {
         newPieces[movePossible] = '\u25CB';
     }
-    if (pieces[attackMove] !== '' && columnPiece !== 0) {
+    if (pieces[attackMove] !== '' && columnPiece !== 0 && isWhitePiece(pieces, attackMove)) {
+        console.log("isWhitePiece(pieces, attackMove) : " + isWhitePiece(pieces, attackMove));
         newGreenSquares.push(attackMove);
     }
-    if (pieces[attackMove2] !== '' && columnPiece !== 7) {
+    if (pieces[attackMove2] !== '' && columnPiece !== 7 && isWhitePiece(pieces, attackMove2)) {
+        console.log("isWhitePiece(pieces, attackMove2) : " + isWhitePiece(pieces, attackMove2));
         newGreenSquares.push(attackMove2);
     }
 
@@ -51,10 +52,10 @@ export const movePawnBack = (pieces, index, setPieces, setValeur, setGreenSquare
         newPieces[movePossible] = '\u25CB';
     }
 
-    if (pieces[attackMove] !== '' && columnPiece !== 7) {
+    if (pieces[attackMove] !== '' && columnPiece !== 7 && !isWhitePiece(pieces, attackMove)) {
         newGreenSquares.push(attackMove);
     }
-    if (pieces[attackMove2] !== '' && columnPiece !== 0) {
+    if (pieces[attackMove2] !== '' && columnPiece !== 0 && !isWhitePiece(pieces, attackMove2)) {
         newGreenSquares.push(attackMove2);
     }
 
