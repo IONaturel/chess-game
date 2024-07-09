@@ -9,32 +9,66 @@ export const moveHorse = (pieces, index, setPieces, setValeur, setGreenSquares) 
     }
 
     const movesPossible = [];
+    const newGreenSquares = [];
     const columnPiece = findColumnOfPiece(index);
 
-    if (pieces[index - 10] === '' && (columnPiece !== 0 && columnPiece !== 1)) {
-        movesPossible.push(index - 10);
+    if((columnPiece !== 0 && columnPiece !== 1)){
+        if (pieces[index - 10] === '') {
+            movesPossible.push(index - 10);
+        }
+        else{
+            newGreenSquares.push(index - 10)
+        }
+        if (pieces[index + 6] === '') {
+            movesPossible.push(index + 6);
+        }
+        else{
+            newGreenSquares.push(index + 6)
+        }
     }
-    if (pieces[index - 17] === '' && columnPiece !== 0) {
-        movesPossible.push(index - 17);
+    if(columnPiece !== 0){
+        if (pieces[index - 17] === '') {
+            movesPossible.push(index - 17);
+        }
+        else{
+            newGreenSquares.push(index - 17)
+        }
+        if (pieces[index + 15] === '') {
+            movesPossible.push(index + 15);
+        }
+        else{
+            newGreenSquares.push(index + 15)
+        }
     }
-    if (pieces[index - 15] === '' && columnPiece !== 7) {
-        movesPossible.push(index - 15);
+    if(columnPiece !== 7){
+        if (pieces[index - 15] === '') {
+            movesPossible.push(index - 15);
+        }
+        else{
+            newGreenSquares.push(index - 15)
+        }
+        if (pieces[index + 17] === '') {
+            movesPossible.push(index + 17);
+        }
+        else{
+            newGreenSquares.push(index + 17)
+        }
     }
-    if (pieces[index - 6] === '' && (columnPiece !== 6 && columnPiece !== 7)) {
-        movesPossible.push(index - 6);
+    if(columnPiece !== 6 && columnPiece !== 7){
+        if (pieces[index - 6] === '') {
+            movesPossible.push(index - 6);
+        }
+        else{
+            newGreenSquares.push(index - 6)
+        }
+        if (pieces[index + 10] === '') {
+            movesPossible.push(index + 10);
+        }
+        else{
+            newGreenSquares.push(index + 10)
+        }
     }
-    if (pieces[index + 10] === '' && columnPiece !== 6 && columnPiece !== 7) {
-        movesPossible.push(index + 10);
-    }
-    if (pieces[index + 17] === '' && columnPiece !== 7) {
-        movesPossible.push(index + 17);
-    }
-    if (pieces[index + 15] === '' && columnPiece !== 0) {
-        movesPossible.push(index + 15);
-    }
-    if (pieces[index + 6] === '' && (columnPiece !== 0 && columnPiece !== 1)) {
-        movesPossible.push(index + 6);
-    }
+
 
     const newPieces = [...pieces];
 
@@ -43,5 +77,6 @@ export const moveHorse = (pieces, index, setPieces, setValeur, setGreenSquares) 
     }
     setPieces(newPieces);
     setValeur(index);
+    setGreenSquares(newGreenSquares);
 };
 

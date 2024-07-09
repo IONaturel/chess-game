@@ -23,7 +23,7 @@ export const moveTower = (pieces, index, setPieces, setValeur, setGreenSquares) 
         }
         else{
             if(!newGreenSquares.includes(nextMoveUp)){
-                console.log("Here 1 : " + nextMoveUp);
+                //console.log("Here 1 : " + nextMoveUp);
                 newGreenSquares.push(nextMoveUp);
             }
         }
@@ -33,7 +33,7 @@ export const moveTower = (pieces, index, setPieces, setValeur, setGreenSquares) 
         }
         else{
             if(!newGreenSquares.includes(nextMoveDown)){
-            console.log("Here 2 : " + nextMoveDown);
+            //console.log("Here 2 : " + nextMoveDown);
             newGreenSquares.push(nextMoveDown);
             }
         }
@@ -44,7 +44,7 @@ export const moveTower = (pieces, index, setPieces, setValeur, setGreenSquares) 
             }
             else{
                 if(!newGreenSquares.includes(nextMoveRight)){
-                console.log("Here 3 : " + nextMoveRight);
+                //console.log("Here 3 : " + nextMoveRight);
                 newGreenSquares.push(nextMoveRight);
                 }
             }
@@ -56,7 +56,7 @@ export const moveTower = (pieces, index, setPieces, setValeur, setGreenSquares) 
             }
             else{
                 if(!newGreenSquares.includes(nextMoveLeft)){
-                console.log("Here 4 : " + nextMoveLeft);
+                //console.log("Here 4 : " + nextMoveLeft);
                 newGreenSquares.push(nextMoveLeft);
                 }
             }

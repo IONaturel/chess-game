@@ -9,6 +9,8 @@ export const moveBishop = (pieces, index, setPieces, setValeur, setGreenSquares)
     }
 
     const movesPossible = [];
+    const newGreenSquares = [];
+
     let nextMoveUpLeft = index - 9;
     let nextMoveUpRight = index - 7;
 
@@ -16,23 +18,46 @@ export const moveBishop = (pieces, index, setPieces, setValeur, setGreenSquares)
     let nextMoveDownLeft = index + 7;
 
     for(let i=0; i<8; i++){
-        if(pieces[nextMoveUpLeft] === '' && getFractionalPart(nextMoveUpLeft, 8) !== '875'){
-            movesPossible.push(nextMoveUpLeft);
-            nextMoveUpLeft -= 9; 
+        if(getFractionalPart(nextMoveUpLeft, 8) !== '875'){
+            if(pieces[nextMoveUpLeft] === ''){
+                movesPossible.push(nextMoveUpLeft);
+                nextMoveUpLeft -= 9; 
+            }
+            else{
+                if(!newGreenSquares.includes(nextMoveUpLeft)){
+                newGreenSquares.push(nextMoveUpLeft);
+                }
+            }
+            if(pieces[nextMoveDownLeft] === ''){
+                movesPossible.push(nextMoveDownLeft);
+                nextMoveDownLeft += 7; 
+            }
+            else{
+                if(!newGreenSquares.includes(nextMoveDownLeft)){
+                newGreenSquares.push(nextMoveDownLeft);
+                }
+            }
         }
-        if(pieces[nextMoveUpRight] === '' && getFractionalPart(nextMoveUpRight, 8) !== '0'){
-            movesPossible.push(nextMoveUpRight);
-            nextMoveUpRight -= 7; 
+        if(getFractionalPart(nextMoveUpRight, 8) !== '0'){
+            if(pieces[nextMoveUpRight] === ''){
+                movesPossible.push(nextMoveUpRight);
+                nextMoveUpRight -= 7; 
+            }
+            else{
+                if(!newGreenSquares.includes(nextMoveUpRight)){
+                newGreenSquares.push(nextMoveUpRight);
+                }
+            }
+            if(pieces[nextMoveDownRight] === ''){
+                movesPossible.push(nextMoveDownRight);
+                nextMoveDownRight += 9; 
+            }
+            else{
+                if(!newGreenSquares.includes(nextMoveDownRight)){
+                newGreenSquares.push(nextMoveDownRight);
+                }
+            }
         }
-        if(pieces[nextMoveDownRight] === '' && getFractionalPart(nextMoveDownRight, 8) !== '0'){
-            movesPossible.push(nextMoveDownRight);
-            nextMoveDownRight += 9; 
-        }
-        if(pieces[nextMoveDownLeft] === '' && getFractionalPart(nextMoveDownLeft, 8) !== '875'){
-            movesPossible.push(nextMoveDownLeft);
-            nextMoveDownLeft += 7; 
-        }
-        
     }
 
     const newPieces = [...pieces];
@@ -42,5 +67,6 @@ export const moveBishop = (pieces, index, setPieces, setValeur, setGreenSquares)
     }
     setPieces(newPieces);
     setValeur(index);
+    setGreenSquares(newGreenSquares);
 };
 
