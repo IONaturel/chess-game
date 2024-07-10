@@ -1,7 +1,7 @@
 // Queen.js
-import {getFractionalPart, emptyNextMoves, findNextMovesPositions} from '../../utilities/Utilities';
+import {getFractionalPart, emptyNextMoves, findNextMovesPositions, isWhitePiece} from '../../utilities/Utilities';
 
-export const moveQueen = (pieces, index, setPieces, setValeur, setGreenSquares) => {
+export const moveQueen = (pieces, index, setPieces, setValeur, setGreenSquares, isWhite) => {
     let nextMovesPositions = findNextMovesPositions(pieces);
 
     if (nextMovesPositions !== null) {
@@ -23,89 +23,102 @@ export const moveQueen = (pieces, index, setPieces, setValeur, setGreenSquares) 
 
     for(let i=0; i<8; i++){
         // Tower movement
+        // UP direction
         if(pieces[nextMoveUp] === ''){
             movesPossible.push(nextMoveUp);
             nextMoveUp -= 8; 
         }
         else{
-            if(!newGreenSquares.includes(nextMoveUp)){
+            if(!newGreenSquares.includes(nextMoveUp) && isWhitePiece(pieces, nextMoveUp) !== isWhite){
                 newGreenSquares.push(nextMoveUp);
             }
         }
+        // DOWN direction
         if(pieces[nextMoveDown] === ''){
             movesPossible.push(nextMoveDown);
             nextMoveDown += 8; 
         }
         else{
-            if(!newGreenSquares.includes(nextMoveDown)){
+            if(!newGreenSquares.includes(nextMoveDown) && isWhitePiece(pieces, nextMoveDown) !== isWhite){
             newGreenSquares.push(nextMoveDown);
             }
         }
+        // RIGHT direction
         if(getFractionalPart(nextMoveRight, 8) !== "0"){
             if(pieces[nextMoveRight] === ''){
                 movesPossible.push(nextMoveRight);
                 nextMoveRight += 1; 
             }
             else{
-                if(!newGreenSquares.includes(nextMoveRight)){
+                if(!newGreenSquares.includes(nextMoveRight) && isWhitePiece(pieces, nextMoveRight) !== isWhite){
                 newGreenSquares.push(nextMoveRight);
                 }
             }
         }
+        // LEFT direction
         if(getFractionalPart(nextMoveLeft, 8) !== "875"){
             if(pieces[nextMoveLeft] === ''){
                 movesPossible.push(nextMoveLeft);
                 nextMoveLeft -= 1; 
             }
             else{
-                if(!newGreenSquares.includes(nextMoveLeft)){
+                if(!newGreenSquares.includes(nextMoveLeft) && isWhitePiece(pieces, nextMoveLeft) !== isWhite){
                 newGreenSquares.push(nextMoveLeft);
                 }
             }
         }
 
         // Bishop movement
-        if(getFractionalPart(nextMoveUpLeft, 8) !== '875'){
-            if(pieces[nextMoveUpLeft] === ''){
+        //UPLEFT direction
+        if (getFractionalPart(nextMoveUpLeft, 8) !== '875') {
+            if (pieces[nextMoveUpLeft] === '') {
                 movesPossible.push(nextMoveUpLeft);
-                nextMoveUpLeft -= 9; 
+                nextMoveUpLeft -= 9;
             }
-            else{
-                if(!newGreenSquares.includes(nextMoveUpLeft)){
-                newGreenSquares.push(nextMoveUpLeft);
-                }
-            }
-            if(pieces[nextMoveDownLeft] === ''){
-                movesPossible.push(nextMoveDownLeft);
-                nextMoveDownLeft += 7; 
-            }
-            else{
-                if(!newGreenSquares.includes(nextMoveDownLeft)){
-                newGreenSquares.push(nextMoveDownLeft);
+            else {
+                if (!newGreenSquares.includes(nextMoveUpLeft) && isWhitePiece(pieces, nextMoveUpLeft) !== isWhite) {
+                    newGreenSquares.push(nextMoveUpLeft);
                 }
             }
         }
-        if(getFractionalPart(nextMoveUpRight, 8) !== '0'){
-            if(pieces[nextMoveUpRight] === ''){
-                movesPossible.push(nextMoveUpRight);
-                nextMoveUpRight -= 7; 
+        //DOWNLEFT direction
+        if (getFractionalPart(nextMoveDownLeft, 8) !== '875') {
+            if (pieces[nextMoveDownLeft] === '') {
+                movesPossible.push(nextMoveDownLeft);
+                nextMoveDownLeft += 7;
             }
-            else{
-                if(!newGreenSquares.includes(nextMoveUpRight)){
-                newGreenSquares.push(nextMoveUpRight);
+            else {
+                if (!newGreenSquares.includes(nextMoveDownLeft) && isWhitePiece(pieces, nextMoveDownLeft) !== isWhite) {
+                    newGreenSquares.push(nextMoveDownLeft);
                 }
             }
-            if(pieces[nextMoveDownRight] === ''){
-                movesPossible.push(nextMoveDownRight);
-                nextMoveDownRight += 9; 
+        }
+        //UPRIGHT direction
+        if (getFractionalPart(nextMoveUpRight, 8) !== '0') {
+            if (pieces[nextMoveUpRight] === '') {
+                movesPossible.push(nextMoveUpRight);
+                nextMoveUpRight -= 7;
             }
-            else{
-                if(!newGreenSquares.includes(nextMoveDownRight)){
-                newGreenSquares.push(nextMoveDownRight);
+            else {
+                if (!newGreenSquares.includes(nextMoveUpRight) && isWhitePiece(pieces, nextMoveUpRight) !== isWhite) {
+                    newGreenSquares.push(nextMoveUpRight);
+                }
+            }
+        }
+        //DOWNRIGHT direction
+        if (getFractionalPart(nextMoveDownRight, 8) !== '0') {
+            if (pieces[nextMoveDownRight] === '') {
+                movesPossible.push(nextMoveDownRight);
+                nextMoveDownRight += 9;
+            }
+            else {
+                if (!newGreenSquares.includes(nextMoveDownRight) && isWhitePiece(pieces, nextMoveDownRight) !== isWhite) {
+                    newGreenSquares.push(nextMoveDownRight);
                 }
             }
         }
     }
+    
 
     const newPieces = [...pieces];
 

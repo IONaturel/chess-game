@@ -1,7 +1,7 @@
 // Horse.js
-import {emptyNextMoves, findNextMovesPositions, findColumnOfPiece} from '../../utilities/Utilities';
+import {emptyNextMoves, findNextMovesPositions, findColumnOfPiece, isWhitePiece} from '../../utilities/Utilities';
 
-export const moveHorse = (pieces, index, setPieces, setValeur, setGreenSquares) => {
+export const moveHorse = (pieces, index, setPieces, setValeur, setGreenSquares, isWhite) => {
     let nextMovesPositions = findNextMovesPositions(pieces);
 
     if (nextMovesPositions !== null) {
@@ -17,13 +17,17 @@ export const moveHorse = (pieces, index, setPieces, setValeur, setGreenSquares) 
             movesPossible.push(index - 10);
         }
         else{
-            newGreenSquares.push(index - 10)
+            if (!newGreenSquares.includes(index - 10) && isWhitePiece(pieces, index - 10) !== isWhite) {
+                newGreenSquares.push(index - 10);
+            }        
         }
         if (pieces[index + 6] === '') {
             movesPossible.push(index + 6);
         }
         else{
-            newGreenSquares.push(index + 6)
+            if (!newGreenSquares.includes(index + 6) && isWhitePiece(pieces, index + 6) !== isWhite) {
+                newGreenSquares.push(index + 6);
+            } 
         }
     }
     if(columnPiece !== 0){
@@ -31,13 +35,17 @@ export const moveHorse = (pieces, index, setPieces, setValeur, setGreenSquares) 
             movesPossible.push(index - 17);
         }
         else{
-            newGreenSquares.push(index - 17)
+            if (!newGreenSquares.includes(index - 17) && isWhitePiece(pieces, index - 17) !== isWhite) {
+                newGreenSquares.push(index - 17);
+            } 
         }
         if (pieces[index + 15] === '') {
             movesPossible.push(index + 15);
         }
         else{
-            newGreenSquares.push(index + 15)
+            if (!newGreenSquares.includes(index + 15) && isWhitePiece(pieces, index + 15) !== isWhite) {
+                newGreenSquares.push(index + 15);
+            } 
         }
     }
     if(columnPiece !== 7){
@@ -45,13 +53,17 @@ export const moveHorse = (pieces, index, setPieces, setValeur, setGreenSquares) 
             movesPossible.push(index - 15);
         }
         else{
-            newGreenSquares.push(index - 15)
+            if (!newGreenSquares.includes(index - 15) && isWhitePiece(pieces, index - 15) !== isWhite) {
+                newGreenSquares.push(index - 15);
+            } 
         }
         if (pieces[index + 17] === '') {
             movesPossible.push(index + 17);
         }
         else{
-            newGreenSquares.push(index + 17)
+            if (!newGreenSquares.includes(index + 17) && isWhitePiece(pieces, index + 17) !== isWhite) {
+                newGreenSquares.push(index + 17);
+            } 
         }
     }
     if(columnPiece !== 6 && columnPiece !== 7){
@@ -59,13 +71,17 @@ export const moveHorse = (pieces, index, setPieces, setValeur, setGreenSquares) 
             movesPossible.push(index - 6);
         }
         else{
-            newGreenSquares.push(index - 6)
+            if (!newGreenSquares.includes(index - 6) && isWhitePiece(pieces, index - 6) !== isWhite) {
+                newGreenSquares.push(index - 6);
+            } 
         }
         if (pieces[index + 10] === '') {
             movesPossible.push(index + 10);
         }
         else{
-            newGreenSquares.push(index + 10)
+            if (!newGreenSquares.includes(index + 10) && isWhitePiece(pieces, index + 10) !== isWhite) {
+                newGreenSquares.push(index + 10);
+            } 
         }
     }
 

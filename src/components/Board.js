@@ -26,26 +26,45 @@ const Board = () => {
 
     const handleSquareClick = (index) => {
         if (pieces[index] !== '') {
+            //Pawns
             if (pieces[index] === '♟︎') {
                 movePawn(pieces, index, setPieces, setValeur, setGreenSquares);
             } else if (pieces[index] === '♙') {
                 movePawnBack(pieces, index, setPieces, setValeur, setGreenSquares);
             } 
-            else if(pieces[index] === '♖' || pieces[index] === '♜'){
-                moveTower(pieces, index, setPieces, setValeur, setGreenSquares);
+            //White pieces
+            else if(pieces[index] === '♖'){
+                moveTower(pieces, index, setPieces, setValeur, setGreenSquares, true);
             }
-            else if(pieces[index] === '♘' || pieces[index] === '♞'){
-                moveHorse(pieces, index, setPieces, setValeur, setGreenSquares);
+            else if(pieces[index] === '♘'){
+                moveHorse(pieces, index, setPieces, setValeur, setGreenSquares, true);
             }
-            else if(pieces[index] === '♗' || pieces[index] === '♝'){
-                moveBishop(pieces, index, setPieces, setValeur, setGreenSquares);
+            else if(pieces[index] === '♗'){
+                moveBishop(pieces, index, setPieces, setValeur, setGreenSquares, true);
             }
-            else if(pieces[index] === '♕' || pieces[index] === '♛'){
-                moveQueen(pieces, index, setPieces, setValeur, setGreenSquares);
+            else if(pieces[index] === '♕'){
+                moveQueen(pieces, index, setPieces, setValeur, setGreenSquares, true);
             }
-            else if(pieces[index] === '♔' || pieces[index] === '♚'){
-                moveKing(pieces, index, setPieces, setValeur, setGreenSquares);
+            else if(pieces[index] === '♔'){
+                moveKing(pieces, index, setPieces, setValeur, setGreenSquares, true);
             }
+            //Black pieces
+            else if(pieces[index] === '♜'){
+                moveTower(pieces, index, setPieces, setValeur, setGreenSquares, false);
+            }
+            else if(pieces[index] === '♞'){
+                moveHorse(pieces, index, setPieces, setValeur, setGreenSquares, false);
+            }
+            else if(pieces[index] === '♝'){
+                moveBishop(pieces, index, setPieces, setValeur, setGreenSquares, false);
+            }
+            else if(pieces[index] === '♛'){
+                moveQueen(pieces, index, setPieces, setValeur, setGreenSquares, false);
+            }
+            else if(pieces[index] === '♚'){
+                moveKing(pieces, index, setPieces, setValeur, setGreenSquares, false);
+            }
+            //Empty square
             else if (pieces[index] === "\u25CB") {
                 moveToEmptySquare(pieces, index, valeur, setPieces, setGreenSquares);
             }

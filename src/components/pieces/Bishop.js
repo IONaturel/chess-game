@@ -1,7 +1,7 @@
 // Bishop.js
-import {emptyNextMoves, findNextMovesPositions, getFractionalPart} from '../../utilities/Utilities';
+import { emptyNextMoves, findNextMovesPositions, getFractionalPart, isWhitePiece } from '../../utilities/Utilities';
 
-export const moveBishop = (pieces, index, setPieces, setValeur, setGreenSquares) => {
+export const moveBishop = (pieces, index, setPieces, setValeur, setGreenSquares, isWhite) => {
     let nextMovesPositions = findNextMovesPositions(pieces);
 
     if (nextMovesPositions !== null) {
@@ -17,44 +17,52 @@ export const moveBishop = (pieces, index, setPieces, setValeur, setGreenSquares)
     let nextMoveDownRight = index + 9;
     let nextMoveDownLeft = index + 7;
 
-    for(let i=0; i<8; i++){
-        if(getFractionalPart(nextMoveUpLeft, 8) !== '875'){
-            if(pieces[nextMoveUpLeft] === ''){
+    for (let i = 0; i < 8; i++) {
+        //UPLEFT direction
+        if (getFractionalPart(nextMoveUpLeft, 8) !== '875') {
+            if (pieces[nextMoveUpLeft] === '') {
                 movesPossible.push(nextMoveUpLeft);
-                nextMoveUpLeft -= 9; 
+                nextMoveUpLeft -= 9;
             }
-            else{
-                if(!newGreenSquares.includes(nextMoveUpLeft)){
-                newGreenSquares.push(nextMoveUpLeft);
-                }
-            }
-            if(pieces[nextMoveDownLeft] === ''){
-                movesPossible.push(nextMoveDownLeft);
-                nextMoveDownLeft += 7; 
-            }
-            else{
-                if(!newGreenSquares.includes(nextMoveDownLeft)){
-                newGreenSquares.push(nextMoveDownLeft);
+            else {
+                if (!newGreenSquares.includes(nextMoveUpLeft) && isWhitePiece(pieces, nextMoveUpLeft) !== isWhite) {
+                    newGreenSquares.push(nextMoveUpLeft);
                 }
             }
         }
-        if(getFractionalPart(nextMoveUpRight, 8) !== '0'){
-            if(pieces[nextMoveUpRight] === ''){
-                movesPossible.push(nextMoveUpRight);
-                nextMoveUpRight -= 7; 
+        //DOWNLEFT direction
+        if (getFractionalPart(nextMoveDownLeft, 8) !== '875') {
+            if (pieces[nextMoveDownLeft] === '') {
+                movesPossible.push(nextMoveDownLeft);
+                nextMoveDownLeft += 7;
             }
-            else{
-                if(!newGreenSquares.includes(nextMoveUpRight)){
-                newGreenSquares.push(nextMoveUpRight);
+            else {
+                if (!newGreenSquares.includes(nextMoveDownLeft) && isWhitePiece(pieces, nextMoveDownLeft) !== isWhite) {
+                    newGreenSquares.push(nextMoveDownLeft);
                 }
             }
-            if(pieces[nextMoveDownRight] === ''){
-                movesPossible.push(nextMoveDownRight);
-                nextMoveDownRight += 9; 
+        }
+        //UPRIGHT direction
+        if (getFractionalPart(nextMoveUpRight, 8) !== '0') {
+            if (pieces[nextMoveUpRight] === '') {
+                movesPossible.push(nextMoveUpRight);
+                nextMoveUpRight -= 7;
             }
-            else{
-                if(!newGreenSquares.includes(nextMoveDownRight)){
-                newGreenSquares.push(nextMoveDownRight);
+            else {
+                if (!newGreenSquares.includes(nextMoveUpRight) && isWhitePiece(pieces, nextMoveUpRight) !== isWhite) {
+                    newGreenSquares.push(nextMoveUpRight);
+                }
+            }
+        }
+        //DOWNRIGHT direction
+        if (getFractionalPart(nextMoveDownRight, 8) !== '0') {
+            if (pieces[nextMoveDownRight] === '') {
+                movesPossible.push(nextMoveDownRight);
+                nextMoveDownRight += 9;
+            }
+            else {
+                if (!newGreenSquares.includes(nextMoveDownRight) && isWhitePiece(pieces, nextMoveDownRight) !== isWhite) {
+                    newGreenSquares.push(nextMoveDownRight);
                 }
             }
         }
@@ -62,7 +70,7 @@ export const moveBishop = (pieces, index, setPieces, setValeur, setGreenSquares)
 
     const newPieces = [...pieces];
 
-    for(let i = 0; i<movesPossible.length ; i++){
+    for (let i = 0; i < movesPossible.length; i++) {
         newPieces[movesPossible[i]] = '\u25CB';
     }
     setPieces(newPieces);
