@@ -14,7 +14,7 @@ const Board = () => {
         '♜', '♞', '♝', '♛', '♚', '♝', '♞', '♜',
         '♟︎', '♟︎', '♟︎', '♟︎', '♟︎', '♟︎', '♟︎', '♟︎',
         '', '', '', '', '', '', '', '',
-        '', '', '', '♖', '', '♟︎', '', '',
+        '', '', '', '', '', '', '', '',
         '', '', '', '', '', '', '', '',
         '', '', '', '', '', '', '', '',
         '♙', '♙', '♙', '♙', '♙', '♙', '♙', '♙',
@@ -26,10 +26,15 @@ const Board = () => {
 
     const handleSquareClick = (index) => {
         if (pieces[index] !== '') {
+            //Empty square
+            if (pieces[index] === "\u25CB" || greenSquares.includes(index)) {
+                moveToEmptySquare(pieces, index, valeur, setPieces, setGreenSquares);
+            }
             //Pawns
-            if (pieces[index] === '♟︎') {
+            else if (pieces[index] === '♟︎') {
                 movePawn(pieces, index, setPieces, setValeur, setGreenSquares);
-            } else if (pieces[index] === '♙') {
+            } 
+            else if (pieces[index] === '♙') {
                 movePawnBack(pieces, index, setPieces, setValeur, setGreenSquares);
             } 
             //White pieces
@@ -63,10 +68,6 @@ const Board = () => {
             }
             else if(pieces[index] === '♚'){
                 moveKing(pieces, index, setPieces, setValeur, setGreenSquares, false);
-            }
-            //Empty square
-            else if (pieces[index] === "\u25CB") {
-                moveToEmptySquare(pieces, index, valeur, setPieces, setGreenSquares);
             }
         }
         else{

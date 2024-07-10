@@ -85,7 +85,6 @@ export const moveHorse = (pieces, index, setPieces, setValeur, setGreenSquares, 
         }
     }
 
-
     const newPieces = [...pieces];
 
     for(let i = 0; i<movesPossible.length ; i++){

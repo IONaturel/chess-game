@@ -12,24 +12,21 @@ export const getFractionalPart = (numerator, denominator) => {
   }
 
   export const emptyNextMoves = (pieces, positions, setGreenSquares) => {
-    const newGreenSquares = [];
-    setGreenSquares(newGreenSquares);
-
-    if(positions === null){
-        return;
-    }
     const newPieces = [...pieces];
+    if (positions === null) {
+        return newPieces;
+    }
     for (let cpt = 0; cpt < positions.length; cpt++) {
         const index = positions[cpt];
         newPieces[index] = "";
     }
+    setGreenSquares([]);
     return newPieces;
 };
 
 export const moveToEmptySquare = (pieces, index, valeur, setPieces, setGreenSquares) => {
   let nextMovesPositions = findNextMovesPositions(pieces);
-  pieces = emptyNextMoves(pieces, nextMovesPositions, setGreenSquares);
-  const newPieces = [...pieces];
+  const newPieces = emptyNextMoves(pieces, nextMovesPositions, setGreenSquares);
   newPieces[index] = newPieces[valeur];
   newPieces[valeur] = '';
   setPieces(newPieces);
