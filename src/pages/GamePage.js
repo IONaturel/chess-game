@@ -1,10 +1,8 @@
-import React, { useContext } from 'react';
-import { GameContext } from '../contexts/GameContext';
+import React from 'react';
 import Board from '../components/Board';
 import '../styles/Global.css'
 
 const GamePage = () => {
-    const { gameState } = useContext(GameContext);
 
     return (
         <div className="game-page">

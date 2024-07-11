@@ -28,6 +28,8 @@ const Board = () => {
     const [whiteToMove, setWhiteToMove] = useState(true);
     const [whiteCaptured, setWhiteCaptured] = useState({ pieces: [], value: 0 });
     const [blackCaptured, setBlackCaptured] = useState({ pieces: [], value: 0 });
+    const [kingMoved, setKingMoved] = useState({ white: false, black: false });
+    const [rooksMoved, setRooksMoved] = useState({ 0: false, 7: false, 56: false, 63: false });
 
     const pieceValues = {
         '♙': 1, '♖': 5, '♘': 3, '♗': 3, '♕': 9,
@@ -35,14 +37,43 @@ const Board = () => {
     };
 
     const handleMove = (index, moveFunction, isWhite) => {
-        moveFunction(pieces, index, setPieces, setValeur, setGreenSquares, isWhite);
+        moveFunction(pieces, index, setPieces, setValeur, setGreenSquares, isWhite, kingMoved, setKingMoved, rooksMoved, setRooksMoved);
     };
 
     const handleSquareClick = (index) => {
         if (pieces[index] !== '') {
             if (pieces[index] === "\u25CB" || greenSquares.includes(index)) {
+                const isCastlingMove = Math.abs(valeur - index) === 2;
+                if (isCastlingMove) {
+                    if (index === 62) {
+                        // Kingside castling for white
+                        pieces[61] = pieces[63];
+                        pieces[63] = '';
+                    } else if (index === 58) {
+                        // Queenside castling for white
+                        pieces[59] = pieces[56];
+                        pieces[56] = '';
+                    } else if (index === 6) {
+                        // Kingside castling for black
+                        pieces[5] = pieces[7];
+                        pieces[7] = '';
+                    } else if (index === 2) {
+                        // Queenside castling for black
+                        pieces[3] = pieces[0];
+                        pieces[0] = '';
+                    }
+                    setPieces(pieces);
+                }
                 moveToEmptySquare(pieces, index, valeur, setPieces, setGreenSquares, whiteToMove ? setWhiteCaptured : setBlackCaptured, pieceValues);
                 setWhiteToMove(!whiteToMove);
+                if (pieces[valeur] === '♔') {
+                    setKingMoved({ ...kingMoved, white: true });
+                } else if (pieces[valeur] === '♚') {
+                    setKingMoved({ ...kingMoved, black: true });
+                }
+                if (pieces[valeur] === '♖' || pieces[valeur] === '♜') {
+                    setRooksMoved({ ...rooksMoved, [valeur]: true });
+                }
             } else if (whiteToMove && '♙♖♘♗♕♔'.includes(pieces[index])) {
                 handleMove(index, getMoveFunction(pieces[index]), true);
             } else if (!whiteToMove && '♟︎♜♞♝♛♚'.includes(pieces[index])) {
@@ -89,7 +120,7 @@ const Board = () => {
     const squares = Array(64).fill(null).map((_, i) => renderSquare(i));
 
     return (
-        <div className="game">
+        <div className="board-container">
             <CapturedPieces pieces={blackCaptured.pieces} value={blackCaptured.value} title="Black Captured" />
             <div className="board">{squares}</div>
             <CapturedPieces pieces={whiteCaptured.pieces} value={whiteCaptured.value} title="White Captured" />
