@@ -8,7 +8,6 @@ const GamePage = () => {
 
     return (
         <div className="game-page">
-            <h1>Partie en cours</h1>
             <Board />
             {/* Afficher d'autres informations du jeu en utilisant gameState */}
         </div>
