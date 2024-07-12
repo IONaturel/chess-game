@@ -30,6 +30,7 @@ const Board = () => {
     const [blackCaptured, setBlackCaptured] = useState({ pieces: [], value: 0 });
     const [kingMoved, setKingMoved] = useState({ white: false, black: false });
     const [rooksMoved, setRooksMoved] = useState({ 0: false, 7: false, 56: false, 63: false });
+    const [enPassantTarget, setEnPassantTarget] = useState(null);
 
     const pieceValues = {
         '♙': 1, '♖': 5, '♘': 3, '♗': 3, '♕': 9,
@@ -37,13 +38,15 @@ const Board = () => {
     };
 
     const handleMove = (index, moveFunction, isWhite) => {
-        moveFunction(pieces, index, setPieces, setValeur, setGreenSquares, isWhite, kingMoved, setKingMoved, rooksMoved, setRooksMoved);
+        moveFunction(pieces, index, setPieces, setValeur, setGreenSquares, enPassantTarget, setEnPassantTarget, isWhite, kingMoved, setKingMoved, rooksMoved, setRooksMoved);
     };
 
     const handleSquareClick = (index) => {
         if (pieces[index] !== '') {
             if (pieces[index] === "\u25CB" || greenSquares.includes(index)) {
                 const isCastlingMove = Math.abs(valeur - index) === 2;
+                const isEnPassantMove = enPassantTarget !== null && index === enPassantTarget;
+    
                 if (isCastlingMove) {
                     if (index === 62) {
                         // Kingside castling for white
@@ -64,6 +67,16 @@ const Board = () => {
                     }
                     setPieces(pieces);
                 }
+    
+                if (isEnPassantMove) {
+                    // Handle en passant capture
+                    if (pieces[valeur] === '♙') {
+                        pieces[index + 8] = ''; // Remove the captured black pawn
+                    } else if (pieces[valeur] === '♟︎') {
+                        pieces[index - 8] = ''; // Remove the captured white pawn
+                    }
+                }
+    
                 moveToEmptySquare(pieces, index, valeur, setPieces, setGreenSquares, whiteToMove ? setWhiteCaptured : setBlackCaptured, pieceValues);
                 setWhiteToMove(!whiteToMove);
                 if (pieces[valeur] === '♔') {
@@ -74,6 +87,7 @@ const Board = () => {
                 if (pieces[valeur] === '♖' || pieces[valeur] === '♜') {
                     setRooksMoved({ ...rooksMoved, [valeur]: true });
                 }
+                setEnPassantTarget(null); // Reset en passant target after the move
             } else if (whiteToMove && '♙♖♘♗♕♔'.includes(pieces[index])) {
                 handleMove(index, getMoveFunction(pieces[index]), true);
             } else if (!whiteToMove && '♟︎♜♞♝♛♚'.includes(pieces[index])) {
@@ -89,6 +103,7 @@ const Board = () => {
             }
         }
     };
+    
 
     const getMoveFunction = (piece) => {
         switch (piece) {
